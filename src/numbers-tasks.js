@@ -70,7 +70,7 @@ function getAverage(value1, value2) {
  *   (-5,0) (10,-10) => 18.027756377319946
  */
 function getDistanceBetweenPoints(x1, y1, x2, y2) {
-  return Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
+  return Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
 }
 
 /**
@@ -160,7 +160,7 @@ function parseNumberFromString(value) {
  *   1,2,3   => 3.741657386773941
  */
 function getParallelepipedDiagonal(a, b, c) {
-  return Math.sqrt((a ** 2) + (b ** 2) + (c ** 2));
+  return Math.sqrt((a * a) + (b * b) + (c * c));
 }
 
 /**
@@ -181,7 +181,9 @@ function getParallelepipedDiagonal(a, b, c) {
  *   1678, 3  => 2000
  */
 function roundToPowerOfTen(num, pow) {
-  return Math.round(num / 10 ** pow) * 10 ** pow;
+  const a = 10 * pow * pow;
+  const f = num / a;
+  return Math.round(f) * a;
 }
 
 /**
@@ -303,7 +305,6 @@ function getSumToN(n) {
 function getSumOfDigits(num) {
   num = `${num}`;
   if( num.length == 1 ) return +num;
-  
   return +num[0] + getSumOfDigits(num.slice(1));
 }
 
