@@ -19,10 +19,8 @@
  *   5, 5  => 25
  */
 function getRectangleArea(width, height) {
-  'use strict';
   return width * height;
 }
-
 /**
  * Returns a circumference of circle given by radius.
  *
@@ -35,7 +33,6 @@ function getRectangleArea(width, height) {
  *   0    => 0
  */
 function getCircleCircumference(radius) {
-  'use strict';
   return 2 * radius * Math.PI;
 }
 
@@ -52,8 +49,7 @@ function getCircleCircumference(radius) {
  *  -3, 3  => 0
  */
 function getAverage(value1, value2) {
-  'use strict';
-  return (value1 + value2)/2;
+  return value1 / 2 + value2 / 2;
 }
 
 /**
@@ -72,7 +68,6 @@ function getAverage(value1, value2) {
  *   (-5,0) (10,-10) => 18.027756377319946
  */
 function getDistanceBetweenPoints(x1, y1, x2, y2) {
-  'use strict';
   return Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
 }
 
@@ -89,7 +84,6 @@ function getDistanceBetweenPoints(x1, y1, x2, y2) {
  *   5*x = 0         => 0
  */
 function getLinearEquationRoot(a, b) {
-  'use strict';
   return -b / a;
 }
 
@@ -111,11 +105,11 @@ function getLinearEquationRoot(a, b) {
  *   (0,1) (0,1)     => 0
  */
 function getAngleBetweenVectors(x1, y1, x2, y2) {
-  const sumMVectors = x1 * x2 + y1 * y2;
-  const sumMVectorsOne = Math.sqrt(x1 * x1 + y1 * y1);
-  const sumMVectorsTwo = Math.sqrt(x2 * x2 + y2 * y2);
-  const mSumMVectors = sumMVectorsOne * sumMVectorsTwo;
-  return Math.acos(sumMVectors / mSumMVectors);
+  const a = x1 * x2 + y1 * y2;
+  const b = Math.sqrt(x1 * x1 + y1 * y1);
+  const c = Math.sqrt(x2 * x2 + y2 * y2);
+  const d = b * c;
+  return Math.acos(a / d);
 }
 
 /**
@@ -132,7 +126,6 @@ function getAngleBetweenVectors(x1, y1, x2, y2) {
  *     0     => 0
  */
 function getLastDigit(value) {
-  'use strict';
   return value % 10;
 }
 
@@ -148,7 +141,6 @@ function getLastDigit(value) {
  * '-525.5'     => -525.5
  */
 function parseNumberFromString(value) {
-  'use strict';
   return +value;
 }
 
@@ -166,8 +158,8 @@ function parseNumberFromString(value) {
  *   1,2,3   => 3.741657386773941
  */
 function getParallelepipedDiagonal(a, b, c) {
-  'use strict';
-  return Math.sqrt((a * a) + (b * b) + (c * c));
+  const length = a * a + b * b + c * c;
+  return Math.sqrt(length);
 }
 
 /**
@@ -188,7 +180,7 @@ function getParallelepipedDiagonal(a, b, c) {
  *   1678, 3  => 2000
  */
 function roundToPowerOfTen(num, pow) {
-  const a = 10 * pow * pow;
+  const a = 10 ** pow;
   const f = num / a;
   return Math.round(f) * a;
 }
@@ -214,7 +206,7 @@ function isPrime(n) {
   if (n <= 1) {
     return false;
   }
-  for (let i = 2; i <= Math.sqrt(n); i++) {
+  for (let i = 2; i < n; i += 1) {
     if (n % i === 0) {
       return false;
     }
@@ -238,9 +230,9 @@ function isPrime(n) {
  *   toNumber(new Number(42), 0) => 42
  */
 function toNumber(value, def) {
-  const toNum = +value;
-  if (!Number.isNaN(toNum)) {
-    return toNum;
+  const num = +value;
+  if (!Number.isNaN(num)) {
+    return num;
   }
   return def;
 }
@@ -274,9 +266,21 @@ function getCube(num) {
  *   10 => 55
  */
 function getFibonacciNumber(index) {
-  if (index === 0) return 0;
-  if (index === 1) return 1;
-  return getFibonacciNumber(index - 1) + getFibonacciNumber(index - 2);
+  let a = 0;
+  let b = 1;
+  if (index === 0) {
+    return a;
+  }
+  if (index === 1) {
+    return b;
+  }
+  let sum;
+  for (let i = 2; i <= index; i += 1) {
+    sum = a + b;
+    a = b;
+    b = sum;
+  }
+  return sum;
 }
 
 /**
@@ -310,9 +314,12 @@ function getSumToN(n) {
  *   5   => 5  // 5
  */
 function getSumOfDigits(num) {
-  num = `${num}`;
-  if( num.length == 1 ) return +num;
-  return +num[0] + getSumOfDigits(num.slice(1));
+  let res = 0;
+  const temp = String(num);
+  for (let i = 0; i < temp.length; i += 1) {
+    res += +temp[i];
+  }
+  return res;
 }
 
 /**
@@ -327,7 +334,7 @@ function getSumOfDigits(num) {
  *   15  => false
  */
 function isPowerOfTwo(num) {
-  return (Math.log(num) / Math.log(2)) % 1 === 0;
+  return Number.isInteger(Math.log2(num));
 }
 
 /**
@@ -358,7 +365,6 @@ function getSine(num) {
 function numberToStringInBase(number, base) {
   return number.toString(base);
 }
-
 /**
  * Returns a string representation of a number in exponential notation.
  *
@@ -370,7 +376,7 @@ function numberToStringInBase(number, base) {
  * 12345, 2    => '1.23e+4'
  */
 function toExponential(number, fractionDigits) {
-  return (number.toExponential(fractionDigits));
+  return number.toExponential(fractionDigits);
 }
 
 /**
@@ -570,8 +576,8 @@ function getIntegerPartNumber(number) {
  * 0.1, 0.2, 0.3 => 0.6
  */
 function getSumOfNumbers(x1, x2, x3) {
-  let sum = x1 + x2 + x3;
-    return sum.toFixed(1);
+  const sum = x1 + x2 + x3;
+  return sum.toFixed(2);
 }
 
 /**
@@ -603,7 +609,7 @@ function getMaxNumber(firstNumber, secondNumber) {
  * -1, 1 => -1 | 0 | 1
  */
 function getRandomInteger(min, max) {
-  return Math.floor(Math.random() * (max - min) + min);
+  return Math.round(Math.random() * (max - min)) + min;
 }
 
 /**
