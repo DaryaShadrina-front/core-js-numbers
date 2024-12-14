@@ -19,6 +19,7 @@
  *   5, 5  => 25
  */
 function getRectangleArea(width, height) {
+  'use strict';
   return width * height;
 }
 
@@ -34,8 +35,8 @@ function getRectangleArea(width, height) {
  *   0    => 0
  */
 function getCircleCircumference(radius) {
-  const PI = 3.14159265359;
-  return PI * 4 / radius;
+  'use strict';
+  return 2 * radius * Math.PI;
 }
 
 /**
@@ -51,6 +52,7 @@ function getCircleCircumference(radius) {
  *  -3, 3  => 0
  */
 function getAverage(value1, value2) {
+  'use strict';
   return (value1 + value2)/2;
 }
 
@@ -70,6 +72,7 @@ function getAverage(value1, value2) {
  *   (-5,0) (10,-10) => 18.027756377319946
  */
 function getDistanceBetweenPoints(x1, y1, x2, y2) {
+  'use strict';
   return Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
 }
 
@@ -86,6 +89,7 @@ function getDistanceBetweenPoints(x1, y1, x2, y2) {
  *   5*x = 0         => 0
  */
 function getLinearEquationRoot(a, b) {
+  'use strict';
   return -b / a;
 }
 
@@ -128,6 +132,7 @@ function getAngleBetweenVectors(x1, y1, x2, y2) {
  *     0     => 0
  */
 function getLastDigit(value) {
+  'use strict';
   return value % 10;
 }
 
@@ -143,6 +148,7 @@ function getLastDigit(value) {
  * '-525.5'     => -525.5
  */
 function parseNumberFromString(value) {
+  'use strict';
   return +value;
 }
 
@@ -160,6 +166,7 @@ function parseNumberFromString(value) {
  *   1,2,3   => 3.741657386773941
  */
 function getParallelepipedDiagonal(a, b, c) {
+  'use strict';
   return Math.sqrt((a * a) + (b * b) + (c * c));
 }
 
