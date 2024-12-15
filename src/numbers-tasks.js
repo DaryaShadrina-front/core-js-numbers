@@ -105,11 +105,11 @@ function getLinearEquationRoot(a, b) {
  *   (0,1) (0,1)     => 0
  */
 function getAngleBetweenVectors(x1, y1, x2, y2) {
-  const a = x1 * x2 + y1 * y2;
-  const b = Math.sqrt(x1 * x1 + y1 * y1);
-  const c = Math.sqrt(x2 * x2 + y2 * y2);
-  const d = b * c;
-  return Math.acos(a / d);
+  const sumMVectors = x1 * x2 + y1 * y2;
+  const sumMVectorsOne = Math.sqrt(x1 * x1 + y1 * y1);
+  const sumMVectorsTwo = Math.sqrt(x2 * x2 + y2 * y2);
+  const mSumMVectors = sumMVectorsOne * sumMVectorsTwo;
+  return Math.acos(sumMVectors / mSumMVectors);
 }
 
 /**
@@ -180,7 +180,7 @@ function getParallelepipedDiagonal(a, b, c) {
  *   1678, 3  => 2000
  */
 function roundToPowerOfTen(num, pow) {
-  const a = Math.pow(10, pow);
+  const a = 10 ** pow;
   const f = num / a;
   return Math.round(f) * a;
 }
@@ -230,9 +230,9 @@ function isPrime(n) {
  *   toNumber(new Number(42), 0) => 42
  */
 function toNumber(value, def) {
-  const num = +value;
-  if (!Number.isNaN(num)) {
-    return num;
+  const tonum = +value;
+  if (!Number.isNaN(tonum)) {
+    return tonum;
   }
   return def;
 }
@@ -314,12 +314,12 @@ function getSumToN(n) {
  *   5   => 5  // 5
  */
 function getSumOfDigits(num) {
-  let res = 0;
-  const temp = String(num);
-  for (let i = 0; i < temp.length; i += 1) {
-    res += +temp[i];
+  let chang = 0;
+  const strnum = String(num);
+  for (let i = 0; i < strnum.length; i += 1) {
+    chang += +strnum[i];
   }
-  return res;
+  return chang;
 }
 
 /**
